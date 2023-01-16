@@ -4,6 +4,7 @@ export namespace Constants {
   export const NAME: string = "";
   export const SYMBOL: string = "";
   export const PRICE: u64 = 0;
+  export const FEE_MINT: bool = true;
   export const MAX: u64 = u64.MAX_VALUE;
   export const URI: string = "";
   export const OWNER: Uint8Array = Base58.decode("");

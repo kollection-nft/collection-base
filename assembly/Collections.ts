@@ -121,9 +121,10 @@ export class Collections {
     // process
     let supply = this._state.getSupply();
     let balance = this._state.getBalance(to);
-    
+    let tokens = SafeMath.add(supply.value, args.tokens);
+
     // pay mint price token or check creator
-    if(Constants.PRICE > 0) {
+    if(Constants.FEE_MINT) {
       let token_pay = new Token(Constants.TOKEN_PAY);
       let _result = token_pay.transfer(to, Constants.ADDRESS_PAY, Constants.PRICE);
       System.require(_result, "Failed to pay mint")
@@ -131,35 +132,42 @@ export class Collections {
       System.requireAuthority(authority.authorization_type.contract_call, Constants.OWNER);
     }
     
-    let token_id = SafeMath.add(supply.value, 1);
 
     // check limit amount tokens
-    System.require(token_id > 0, "token id out of bounds")
+    System.require(tokens > 0, "token id out of bounds")
     // check limit amount tokens
-    System.require(token_id <= Constants.MAX, "token id out of bounds")
-
+    System.require(tokens <= Constants.MAX, "token id out of bounds")
+    
     // assign the new token's owner
-    let new_token = new collections.token_object(to);
+    let start = SafeMath.add(supply.value, 1)
+    for (let index = start; index <= tokens; index++) {
+      
+      // mint token
+      let newToken = new collections.token_object(to);
+      this._state.saveToken(index, newToken);
+
+      // events
+      const mintEvent = new collections.mint_event(to, index);
+      const impacted = [to];
+      System.event(
+        "nft.mint",
+        Protobuf.encode(mintEvent, collections.mint_event.encode),
+        impacted
+      );
+    }
 
     // update the owner's balance
-    balance.value = SafeMath.add(balance.value, 1);
+    balance.value = SafeMath.add(balance.value, args.tokens);
+
+    // check limit address
+    System.require(balance.value <= 10, "exceeds the limit of tokens per address")
 
     // increment supply
-    supply.value = SafeMath.add(supply.value, 1);
+    supply.value = SafeMath.add(supply.value, args.tokens);
 
     // save new states
     this._state.saveBalance(to, balance);
-    this._state.saveToken(token_id, new_token);
     this._state.saveSupply(supply);
-
-    // generate event
-    const mintEvent = new collections.mint_event(to, token_id);
-    const impacted = [to];
-    System.event(
-      "nft.mint",
-      Protobuf.encode(mintEvent, collections.mint_event.encode),
-      impacted
-    );
 
     res.value = true;
     return res;
