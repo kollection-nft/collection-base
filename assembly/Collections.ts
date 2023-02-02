@@ -275,7 +275,7 @@ export class Collections {
     // check that the approver_address is allowed to approve the token
     if(!Arrays.equal(token.owner, approver_address)) {
       let approval = this._state.getApprovedOperator(token.owner, approver_address)
-      if (!approval!.approved) {
+      if (!approval || !approval.approved) {
         System.log("approver_address is not owner nor approved");
         return res;
       }
