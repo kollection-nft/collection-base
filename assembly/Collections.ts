@@ -1,4 +1,4 @@
-import { System, SafeMath, Protobuf, Arrays, authority, Token } from "@koinos/sdk-as";
+import { System, SafeMath, Protobuf, Arrays, authority, Token, error } from "@koinos/sdk-as";
 import { collections } from "./proto/collections";
 
 // libs
@@ -182,15 +182,12 @@ export class Collections {
 
     // process
     let token = this._state.getToken(token_id);
-    if (!token) {
-      System.log("nonexistent token");
-      return res;
-    }
 
-    if(!Arrays.equal(token.owner, from)) {
-      System.log("from is not a owner");
-      return res;
-    }
+    // check if the token exists
+    System.require(token != null, "nonexistent token", error.error_code.failure);
+
+    // check if owner if from
+    System.require(Arrays.equal(token!.owner, from), "from is not a owner", error.error_code.authorization_failure);
 
     // check authorize tokens
     let isTokenApproved: bool = false;
@@ -202,7 +199,7 @@ export class Collections {
         isTokenApproved = Arrays.equal(approvedAddress, caller.caller);
       }
       if(!isTokenApproved) {
-        const operatorApproval = this._state.getApprovedOperator(token.owner, caller.caller);
+        const operatorApproval = this._state.getApprovedOperator(token!.owner, caller.caller);
         if(operatorApproval) {
           isTokenApproved = operatorApproval.approved;
         }
@@ -210,16 +207,13 @@ export class Collections {
           isTokenApproved = System.checkAuthority(authority.authorization_type.contract_call, from)
         }
       }
-      if(!isTokenApproved) {
-        System.log("from has not authorized transfer");
-        return res;
-      }
+      System.require(isTokenApproved, "from has not authorized transfer", error.error_code.authorization_failure)
     }
     // clear the token approval
     this._state.removeApproved(token_id);
 
     // update the owner token
-    token.owner = to;
+    token!.owner = to;
 
     // update the current owner's balance
     const balance_from = this._state.getBalance(from);
@@ -230,7 +224,7 @@ export class Collections {
     balance_to.value = SafeMath.add(balance_to.value, 1);
 
     // save new states
-    this._state.saveToken(token_id, token);
+    this._state.saveToken(token_id, token!);
     this._state.saveBalance(to, balance_to);
     this._state.saveBalance(from, balance_from);
 
@@ -261,24 +255,16 @@ export class Collections {
 
     // check that the token exists
     let token = this._state.getToken(token_id);
-    if (!token) {
-      System.log("nonexistent token");
-      return res;
-    }
+    System.require(token != null, "nonexistent token", error.error_code.failure)
 
     // check that the to is not the owner
-    if(Arrays.equal(token.owner, to)) {
-      System.log("approve to current owner");
-      return res;
-    }
+    System.require(!Arrays.equal(token!.owner, to), "approve to current owner", error.error_code.failure)
 
     // check that the approver_address is allowed to approve the token
-    if(!Arrays.equal(token.owner, approver_address)) {
-      let approval = this._state.getApprovedOperator(token.owner, approver_address)
-      if (!approval || !approval.approved) {
-        System.log("approver_address is not owner nor approved");
-        return res;
-      }
+    if(!Arrays.equal(token!.owner, approver_address)) {
+      let approval = this._state.getApprovedOperator(token!.owner, approver_address)
+      System.require(approval != null, "approved does not exist", error.error_code.authorization_failure)
+      System.require(approval!.approved, "approver_address is not owner", error.error_code.authorization_failure)
     }
 
     // update approval
@@ -319,10 +305,7 @@ export class Collections {
     );
 
     // check that the approver_address is not the address to approve
-    if(Arrays.equal(approver_address, operator_address)) {
-      System.log("approve to operator_address");
-      return res;
-    }
+    System.require(!Arrays.equal(approver_address, operator_address), "approve to operator_address", error.error_code.authorization_failure)
 
     // update the approval
     let approval = this._state.getApprovedOperator(operator_address, approver_address);
