@@ -311,6 +311,8 @@ export class Collections {
     let approval = this._state.getApprovedOperator(operator_address, approver_address);
     if(!approval) {
       approval = new collections.operator_approval_object(approved)
+    } else {
+      approval.approved = approved;
     }
 
     this._state.saveApprovedOperator(operator_address, approver_address, approval);
