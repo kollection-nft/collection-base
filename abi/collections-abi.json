@@ -1,130 +1,130 @@
 {
     "methods": {
         "name": {
-            "input": "collections.name_arguments",
-            "output": "collections.string_object",
+            "argument": "collections.name_arguments",
+            "return": "collections.string_object",
             "description": "Returns the token's name",
-            "entryPoint": 2191741823,
-            "readOnly": true
+            "entry_point": 2191741823,
+            "read_only": true
         },
         "uri": {
-            "input": "collections.uri_arguments",
-            "output": "collections.string_object",
+            "argument": "collections.uri_arguments",
+            "return": "collections.string_object",
             "description": "Returns the token's uri",
-            "entryPoint": 1894111158,
-            "readOnly": true
+            "entry_point": 1894111158,
+            "read_only": true
         },
         "symbol": {
-            "input": "collections.symbol_arguments",
-            "output": "collections.string_object",
+            "argument": "collections.symbol_arguments",
+            "return": "collections.string_object",
             "description": "Returns the token's symbol",
-            "entryPoint": 3077209249,
-            "readOnly": true
+            "entry_point": 3077209249,
+            "read_only": true
         },
         "get_approved": {
-            "input": "collections.get_approved_arguments",
-            "output": "collections.address_object",
+            "argument": "collections.get_approved_arguments",
+            "return": "collections.address_object",
             "description": "Gets approved address for a token",
-            "entryPoint": 1282609184,
-            "readOnly": true
+            "entry_point": 1282609184,
+            "read_only": true
         },
         "is_approved_for_all": {
-            "input": "collections.is_approved_for_all_arguments",
-            "output": "collections.bool_object",
+            "argument": "collections.is_approved_for_all_arguments",
+            "return": "collections.bool_object",
             "description": "Checks if an operator is approved by an owner",
-            "entryPoint": 3886779621,
-            "readOnly": true
+            "entry_point": 3886779621,
+            "read_only": true
         },
         "total_supply": {
-            "input": "collections.total_supply_arguments",
-            "output": "collections.uint64_object",
+            "argument": "collections.total_supply_arguments",
+            "return": "collections.uint64_object",
             "description": "Returns the token's total supply",
-            "entryPoint": 2967091508,
-            "readOnly": true
+            "entry_point": 2967091508,
+            "read_only": true
         },
         "royalties": {
-            "input": "collections.royalties_arguments",
-            "output": "collections.royalties_result",
+            "argument": "collections.royalties_arguments",
+            "return": "collections.royalties_result",
             "description": "Returns collection royalties",
-            "entryPoint": 921242832,
-            "readOnly": true
+            "entry_point": 921242832,
+            "read_only": true
         },
         "set_royalties": {
-            "input": "collections.set_royalties_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.set_royalties_arguments",
+            "return": "collections.empty_object",
             "description": "Returns collection royalties",
-            "entryPoint": 995865963,
-            "readOnly": false
+            "entry_point": 995865963,
+            "read_only": false
         },
         "owner": {
-            "input": "collections.owner_arguments",
-            "output": "collections.address_object",
+            "argument": "collections.owner_arguments",
+            "return": "collections.address_object",
             "description": "Returns collection owner",
-            "entryPoint": 1276127593,
-            "readOnly": true
+            "entry_point": 1276127593,
+            "read_only": true
         },
         "transfer_ownership": {
-            "input": "collections.transfer_ownership_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.transfer_ownership_arguments",
+            "return": "collections.empty_object",
             "description": "Transfer ownership",
-            "entryPoint": 961275650,
-            "readOnly": false
+            "entry_point": 961275650,
+            "read_only": false
         },
         "balance_of": {
-            "input": "collections.balance_of_arguments",
-            "output": "collections.uint64_object",
+            "argument": "collections.balance_of_arguments",
+            "return": "collections.uint64_object",
             "description": "Gets the balance of an owner",
-            "entryPoint": 1550980247,
-            "readOnly": true
+            "entry_point": 1550980247,
+            "read_only": true
         },
         "owner_of": {
-            "input": "collections.owner_of_arguments",
-            "output": "collections.address_object",
+            "argument": "collections.owner_of_arguments",
+            "return": "collections.address_object",
             "description": "Gets the owner of a token",
-            "entryPoint": 3982608455,
-            "readOnly": true
+            "entry_point": 3982608455,
+            "read_only": true
         },
         "mint": {
-            "input": "collections.mint_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.mint_arguments",
+            "return": "collections.empty_object",
             "description": "Mints a new token",
-            "entryPoint": 3698268091,
-            "readOnly": false
+            "entry_point": 3698268091,
+            "read_only": false
         },
         "burn": {
-            "input": "collections.burn_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.burn_arguments",
+            "return": "collections.empty_object",
             "description": "Burns an existing token",
-            "entryPoint": 2241834181,
-            "readOnly": false
+            "entry_point": 2241834181,
+            "read_only": false
         },
         "transfer": {
-            "input": "collections.transfer_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.transfer_arguments",
+            "return": "collections.empty_object",
             "description": "Transfers a token",
-            "entryPoint": 670398154,
-            "readOnly": false
+            "entry_point": 670398154,
+            "read_only": false
         },
         "approve": {
-            "input": "collections.approve_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.approve_arguments",
+            "return": "collections.empty_object",
             "description": "Approves an address to transfer a token",
-            "entryPoint": 1960973952,
-            "readOnly": false
+            "entry_point": 1960973952,
+            "read_only": false
         },
         "set_approval_for_all": {
-            "input": "collections.set_approval_for_all_arguments",
-            "output": "collections.empty_object",
+            "argument": "collections.set_approval_for_all_arguments",
+            "return": "collections.empty_object",
             "description": "Approves or revokes an address to operate on all tokens owned by caller",
-            "entryPoint": 541336086,
-            "readOnly": false
+            "entry_point": 541336086,
+            "read_only": false
         },
         "get_info": {
-            "input": "collections.get_info_arguments",
-            "output": "collections.get_info_result",
+            "argument": "collections.get_info_arguments",
+            "return": "collections.get_info_result",
             "description": "Get token information (id type, etc...)",
-            "entryPoint": 3179243600,
-            "readOnly": true
+            "entry_point": 3179243600,
+            "read_only": true
         }
     },
     "types": {
@@ -258,7 +258,7 @@
                     },
                     "get_approved_arguments": {
                         "fields": {
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 1
                             }
@@ -333,7 +333,7 @@
                     },
                     "owner_of_arguments": {
                         "fields": {
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 1
                             }
@@ -348,7 +348,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokens": {
+                            "number_tokens_to_mint": {
                                 "type": "uint64",
                                 "id": 2,
                                 "options": {
@@ -366,7 +366,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 2
                             }
@@ -388,7 +388,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 3
                             }
@@ -396,7 +396,7 @@
                     },
                     "approve_arguments": {
                         "fields": {
-                            "approverAddress": {
+                            "approver_address": {
                                 "type": "bytes",
                                 "id": 1,
                                 "options": {
@@ -410,7 +410,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 3
                             }
@@ -418,14 +418,14 @@
                     },
                     "set_approval_for_all_arguments": {
                         "fields": {
-                            "approverAddress": {
+                            "approver_address": {
                                 "type": "bytes",
                                 "id": 1,
                                 "options": {
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "operatorAddress": {
+                            "operator_address": {
                                 "type": "bytes",
                                 "id": 2,
                                 "options": {
@@ -443,7 +443,7 @@
                     },
                     "get_info_result": {
                         "fields": {
-                            "idType": {
+                            "id_type": {
                                 "type": "string",
                                 "id": 1
                             }
@@ -458,7 +458,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 2
                             }
@@ -473,7 +473,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 2
                             }
@@ -495,7 +495,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 3
                             }
@@ -503,14 +503,14 @@
                     },
                     "operator_approval_event": {
                         "fields": {
-                            "approverAddress": {
+                            "approver_address": {
                                 "type": "bytes",
                                 "id": 1,
                                 "options": {
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "operatorAddress": {
+                            "operator_address": {
                                 "type": "bytes",
                                 "id": 2,
                                 "options": {
@@ -525,7 +525,7 @@
                     },
                     "token_approval_event": {
                         "fields": {
-                            "approverAddress": {
+                            "approver_address": {
                                 "type": "bytes",
                                 "id": 1,
                                 "options": {
@@ -539,7 +539,7 @@
                                     "(koinos.btype)": "ADDRESS"
                                 }
                             },
-                            "tokenId": {
+                            "token_id": {
                                 "type": "bytes",
                                 "id": 3
                             }

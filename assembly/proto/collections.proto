@@ -139,7 +139,7 @@ message owner_of_arguments {
 // @result empty_object
 message mint_arguments {
    bytes to = 1 [(koinos.btype) = ADDRESS];
-   uint64 tokens = 2 [jstype = JS_STRING];
+   uint64 number_tokens_to_mint = 2 [jstype = JS_STRING];
 }
 
 // @description Burns an existing token

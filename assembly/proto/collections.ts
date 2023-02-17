@@ -821,9 +821,9 @@ export namespace collections {
         writer.bytes(message.to);
       }
 
-      if (message.tokens != 0) {
+      if (message.number_tokens_to_mint != 0) {
         writer.uint32(16);
-        writer.uint64(message.tokens);
+        writer.uint64(message.number_tokens_to_mint);
       }
     }
 
@@ -839,7 +839,7 @@ export namespace collections {
             break;
 
           case 2:
-            message.tokens = reader.uint64();
+            message.number_tokens_to_mint = reader.uint64();
             break;
 
           default:
@@ -852,11 +852,14 @@ export namespace collections {
     }
 
     to: Uint8Array;
-    tokens: u64;
+    number_tokens_to_mint: u64;
 
-    constructor(to: Uint8Array = new Uint8Array(0), tokens: u64 = 0) {
+    constructor(
+      to: Uint8Array = new Uint8Array(0),
+      number_tokens_to_mint: u64 = 0
+    ) {
       this.to = to;
-      this.tokens = tokens;
+      this.number_tokens_to_mint = number_tokens_to_mint;
     }
   }
 

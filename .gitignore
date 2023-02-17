@@ -7,4 +7,3 @@ build
 *.wasm
 *.pb
 *.sh
-.devcontainer/devcontainer.json

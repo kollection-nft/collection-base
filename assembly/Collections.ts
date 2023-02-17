@@ -118,15 +118,19 @@ export class Collections {
     // process
     const supply = this._state.getSupply();
     const balance = this._state.getBalance(to);
-    const tokens = SafeMath.add(supply.value, args.tokens);
+    const tokens = SafeMath.add(supply.value, args.number_tokens_to_mint);
 
     // pay mint price token or check creator
     if (Constants.FEE_MINT) {
       const token_pay = new Token(Constants.TOKEN_PAY);
-      const _result = token_pay.transfer(to, Constants.ADDRESS_PAY, Constants.PRICE);
+      const _result = token_pay.transfer(to, Constants.ADDRESS_PAY, SafeMath.mul(args.number_tokens_to_mint, Constants.PRICE));
       System.require(_result, "Failed to pay mint");
-    } else {
+    } else if (Constants.OWNER.length > 0) {
+      // if OWNER is setup
       System.requireAuthority(authority.authorization_type.contract_call, Constants.OWNER);
+    } else {
+      // otherwise, check contract id permissions
+      System.requireAuthority(authority.authorization_type.contract_call, this._contractId);
     }
 
     // check limit amount tokens
@@ -161,13 +165,13 @@ export class Collections {
     }
 
     // update the owner's balance
-    balance.value = SafeMath.add(balance.value, args.tokens);
+    balance.value = SafeMath.add(balance.value, args.number_tokens_to_mint);
 
     // check limit address
     System.require(balance.value <= 10, "exceeds the limit of tokens per address");
 
     // increment supply
-    supply.value = SafeMath.add(supply.value, args.tokens);
+    supply.value = SafeMath.add(supply.value, args.number_tokens_to_mint);
 
     // save new states
     this._state.saveBalance(to, balance);
@@ -254,11 +258,11 @@ export class Collections {
     this._state.saveBalance(from, balance_from);
 
     // generate event
-    const mintEvent = new collections.transfer_event(from, to, args.token_id);
-    const impacted = [to];
+    const transferEvent = new collections.transfer_event(from, to, args.token_id);
+    const impacted = [to, from];
     System.event(
       "collections.transfer_event",
-      Protobuf.encode(mintEvent, collections.transfer_event.encode),
+      Protobuf.encode(transferEvent, collections.transfer_event.encode),
       impacted
     );
 

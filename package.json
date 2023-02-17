@@ -11,7 +11,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "assemblyscript": "^0.19.22",
     "eslint": "^8.7.0",
-    "@koinos/abi-proto-gen": "^1.0.0",
+    "@koinos/abi-proto-gen": "github:roaminro/koinos-abi-proto-gen#b0a4b0a843e95b3a58bfea284a33f68ac71d7b37",
     "@koinos/as-proto-gen": "^1.0.3",
     "@koinos/mock-vm": "^1.0.0",
     "@koinos/sdk-as": "^1.0.2",
@@ -29,6 +29,8 @@
     "proto": "koinos-sdk-as-cli generate-contract-proto",
     "build:debug": "koinos-sdk-as-cli build-all debug 0 collections.proto",
     "build:release": "koinos-sdk-as-cli build-all release 0 collections.proto",
-    "test": "koinos-sdk-as-cli run-tests"
+    "test": "koinos-sdk-as-cli run-tests",
+    "ci": "yarn build:release && ENV=CI jest -i",
+    "local-ci": "ENV=LOCAL jest -i"
   }
 }

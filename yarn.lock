@@ -691,10 +691,17 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@koinos/abi-proto-gen@1.0.0", "@koinos/abi-proto-gen@^1.0.0":
+"@koinos/abi-proto-gen@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@koinos/abi-proto-gen/-/abi-proto-gen-1.0.0.tgz#712e697ed83d47bbde36504094e9e86e40455f50"
   integrity sha512-jxej1K2VRYHDibyFkMKV7IhOSTBqCy8qxs5V0QjaD/+kHLd4TIPawl3t7wyDaa6kMFVHmnW2qEgfIY725uZtDA==
+  dependencies:
+    google-protobuf "^3.19.4"
+    protobufjs "^6.11.2"
+
+"@koinos/abi-proto-gen@github:roaminro/koinos-abi-proto-gen#b0a4b0a843e95b3a58bfea284a33f68ac71d7b37":
+  version "1.0.1"
+  resolved "https://codeload.github.com/roaminro/koinos-abi-proto-gen/tar.gz/b0a4b0a843e95b3a58bfea284a33f68ac71d7b37"
   dependencies:
     google-protobuf "^3.19.4"
     protobufjs "^6.11.2"
