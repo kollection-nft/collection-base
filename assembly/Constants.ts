@@ -8,6 +8,7 @@ export namespace Constants {
   export const MAX: u64 = 100000000000000;
   export const URI: string = "";
   export const OWNER: Uint8Array = Base58.decode("");
+  export const ID_TYPE: string = "bytes";
 
   // token mint
   export const TOKEN_PAY: Uint8Array = Base58.decode("");

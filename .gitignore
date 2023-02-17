@@ -7,11 +7,4 @@ build
 *.wasm
 *.pb
 *.sh
-**/abi/*.abi
-**/abi/*.json
-**/proto/*.ts
-**/assembly/*.boilerplate.ts
-
-
-test.js
-decoder.js
+.devcontainer/devcontainer.json
