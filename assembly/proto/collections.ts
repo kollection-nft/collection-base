@@ -565,12 +565,38 @@ export namespace collections {
   }
 
   @unmanaged
-  export class total_supply_arguments {
-    static encode(message: total_supply_arguments, writer: Writer): void {}
+  export class circulating_supply_arguments {
+    static encode(
+      message: circulating_supply_arguments,
+      writer: Writer
+    ): void {}
 
-    static decode(reader: Reader, length: i32): total_supply_arguments {
+    static decode(reader: Reader, length: i32): circulating_supply_arguments {
       const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new total_supply_arguments();
+      const message = new circulating_supply_arguments();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    constructor() {}
+  }
+
+  @unmanaged
+  export class max_supply_arguments {
+    static encode(message: max_supply_arguments, writer: Writer): void {}
+
+    static decode(reader: Reader, length: i32): max_supply_arguments {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new max_supply_arguments();
 
       while (reader.ptr < end) {
         const tag = reader.uint32();

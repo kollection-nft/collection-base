@@ -88,8 +88,8 @@ describe('mint', () => {
     expect(eventData.to).toEqual(user1.address);
     expect(decodeBase64Url(eventData.token_id as string)).toEqual('1');
 
-    // check total_supply
-    res = await collectionsContract.functions.total_supply({
+    // check circulating_supply
+    res = await collectionsContract.functions.circulating_supply({
     });
 
     expect(res.result.value).toEqual('1');
@@ -132,8 +132,8 @@ describe('mint', () => {
     expect(eventData.to).toEqual(user2.address);
     expect(decodeBase64Url(eventData.token_id as string)).toEqual('2');
 
-    // check total_supply
-    res = await collectionsContract.functions.total_supply({
+    // check circulating_supply
+    res = await collectionsContract.functions.circulating_supply({
     });
 
     expect(res.result.value).toEqual('2');
@@ -151,6 +151,12 @@ describe('mint', () => {
     });
 
     expect(res.result.value).toEqual(user2.address);
+
+    // check max supply
+    res = await collectionsContract.functions.max_supply({
+    });
+
+    expect(res.result.value).toEqual('100000000000000');
 
   });
 });

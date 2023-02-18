@@ -86,10 +86,15 @@ message is_approved_for_all_arguments {
    bytes operator = 2 [(koinos.btype) = ADDRESS];
 }
 
-// @description Returns the token's total supply
+// @description Returns the token's circulating supply
 // @read-only true
 // @result uint64_object
-message total_supply_arguments {}
+message circulating_supply_arguments {}
+
+// @description Returns the token's max supply
+// @read-only true
+// @result uint64_object
+message max_supply_arguments {}
 
 // @description Returns collection royalties
 // @read-only true

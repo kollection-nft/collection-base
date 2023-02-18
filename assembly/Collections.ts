@@ -26,9 +26,13 @@ export class Collections {
     return new collections.string_object(Constants.URI);
   }
 
-  total_supply(args: collections.total_supply_arguments): collections.uint64_object {
+  circulating_supply(args: collections.circulating_supply_arguments): collections.uint64_object {
     const supply = this._state.getSupply();
     return new collections.uint64_object(supply.value);
+  }
+
+  max_supply(args: collections.max_supply_arguments): collections.uint64_object {
+    return new collections.uint64_object(Constants.MAX_SUPPLY);
   }
 
   royalties(args: collections.royalties_arguments): collections.royalties_result {
@@ -117,9 +121,9 @@ export class Collections {
     const tokens = SafeMath.add(supply.value, args.number_tokens_to_mint);
 
     // pay mint price token or check creator
-    if (Constants.FEE_MINT) {
+    if (Constants.MINT_FEE > 0) {
       const token_pay = new Token(Constants.TOKEN_PAY);
-      const _result = token_pay.transfer(to, Constants.ADDRESS_PAY, SafeMath.mul(args.number_tokens_to_mint, Constants.PRICE));
+      const _result = token_pay.transfer(to, Constants.ADDRESS_PAY, SafeMath.mul(args.number_tokens_to_mint, Constants.MINT_PRICE));
       System.require(_result, "Failed to pay mint");
     } else if (Constants.OWNER.length > 0) {
       // if OWNER is setup
@@ -132,7 +136,7 @@ export class Collections {
     // check limit amount tokens
     System.require(tokens > 0, "token id out of bounds");
     // check limit amount tokens
-    System.require(tokens <= Constants.MAX, "token id out of bounds");
+    System.require(tokens <= Constants.MAX_SUPPLY, "token id out of bounds");
 
     // assign the new token's owner
     const start = SafeMath.add(supply.value, 1);
