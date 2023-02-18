@@ -1098,64 +1098,6 @@ export namespace collections {
     }
   }
 
-  @unmanaged
-  export class get_info_arguments {
-    static encode(message: get_info_arguments, writer: Writer): void {}
-
-    static decode(reader: Reader, length: i32): get_info_arguments {
-      const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new get_info_arguments();
-
-      while (reader.ptr < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          default:
-            reader.skipType(tag & 7);
-            break;
-        }
-      }
-
-      return message;
-    }
-
-    constructor() {}
-  }
-
-  export class get_info_result {
-    static encode(message: get_info_result, writer: Writer): void {
-      if (message.id_type.length != 0) {
-        writer.uint32(10);
-        writer.string(message.id_type);
-      }
-    }
-
-    static decode(reader: Reader, length: i32): get_info_result {
-      const end: usize = length < 0 ? reader.end : reader.ptr + length;
-      const message = new get_info_result();
-
-      while (reader.ptr < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1:
-            message.id_type = reader.string();
-            break;
-
-          default:
-            reader.skipType(tag & 7);
-            break;
-        }
-      }
-
-      return message;
-    }
-
-    id_type: string;
-
-    constructor(id_type: string = "") {
-      this.id_type = id_type;
-    }
-  }
-
   export class mint_event {
     static encode(message: mint_event, writer: Writer): void {
       if (message.to.length != 0) {

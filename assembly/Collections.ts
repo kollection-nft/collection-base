@@ -108,10 +108,6 @@ export class Collections {
     return res;
   }
 
-  get_info(args: collections.get_info_arguments): collections.get_info_result {
-    return new collections.get_info_result(Constants.ID_TYPE);
-  }
-
   mint(args: collections.mint_arguments): collections.empty_object {
     const to = args.to;
 

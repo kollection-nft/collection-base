@@ -177,15 +177,6 @@ message set_approval_for_all_arguments {
    bool approved = 3;
 }
 
-// @description Get token information (id type, etc...)
-// @read-only true
-message get_info_arguments {
-}
-
-message get_info_result {
-   string id_type = 1;
-}
-
 // events
 message mint_event {
    bytes to = 1 [(koinos.btype) = ADDRESS];

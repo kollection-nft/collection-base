@@ -181,16 +181,6 @@ export function main(): i32 {
       break;
     }
 
-    case 0xbd7f6850: {
-      const args = Protobuf.decode<ProtoNamespace.get_info_arguments>(
-        contractArgs.args,
-        ProtoNamespace.get_info_arguments.decode
-      );
-      const res = c.get_info(args);
-      retbuf = Protobuf.encode(res, ProtoNamespace.get_info_result.encode);
-      break;
-    }
-
     default:
       System.exit(1);
       break;

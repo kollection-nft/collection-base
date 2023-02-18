@@ -194,13 +194,4 @@ export class Collections {
 
     return res;
   }
-
-  get_info(args: collections.get_info_arguments): collections.get_info_result {
-    // YOUR CODE HERE
-
-    const res = new collections.get_info_result();
-    // res.id_type = ;
-
-    return res;
-  }
 }

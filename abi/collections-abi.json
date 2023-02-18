@@ -118,13 +118,6 @@
             "description": "Approves or revokes an address to operate on all tokens owned by caller",
             "entry_point": 541336086,
             "read_only": false
-        },
-        "get_info": {
-            "argument": "collections.get_info_arguments",
-            "return": "collections.get_info_result",
-            "description": "Get token information (id type, etc...)",
-            "entry_point": 3179243600,
-            "read_only": true
         }
     },
     "types": {
@@ -435,17 +428,6 @@
                             "approved": {
                                 "type": "bool",
                                 "id": 3
-                            }
-                        }
-                    },
-                    "get_info_arguments": {
-                        "fields": {}
-                    },
-                    "get_info_result": {
-                        "fields": {
-                            "id_type": {
-                                "type": "string",
-                                "id": 1
                             }
                         }
                     },
