@@ -26,13 +26,9 @@ export class Collections {
     return new collections.string_object(Constants.URI);
   }
 
-  circulating_supply(args: collections.circulating_supply_arguments): collections.uint64_object {
+  total_supply(args: collections.total_supply_arguments): collections.uint64_object {
     const supply = this._state.getSupply();
     return new collections.uint64_object(supply.value);
-  }
-
-  max_supply(args: collections.max_supply_arguments): collections.uint64_object {
-    return new collections.uint64_object(Constants.MAX_SUPPLY);
   }
 
   royalties(args: collections.royalties_arguments): collections.royalties_result {

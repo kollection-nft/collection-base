@@ -35,18 +35,11 @@
             "entry_point": 3886779621,
             "read_only": true
         },
-        "circulating_supply": {
-            "argument": "collections.circulating_supply_arguments",
+        "total_supply": {
+            "argument": "collections.total_supply_arguments",
             "return": "collections.uint64_object",
-            "description": "Returns the token's circulating supply",
-            "entry_point": 2005956292,
-            "read_only": true
-        },
-        "max_supply": {
-            "argument": "collections.max_supply_arguments",
-            "return": "collections.uint64_object",
-            "description": "Returns the token's max supply",
-            "entry_point": 46564349,
+            "description": "Returns the token's total supply",
+            "entry_point": 2967091508,
             "read_only": true
         },
         "royalties": {
@@ -282,10 +275,7 @@
                             }
                         }
                     },
-                    "circulating_supply_arguments": {
-                        "fields": {}
-                    },
-                    "max_supply_arguments": {
+                    "total_supply_arguments": {
                         "fields": {}
                     },
                     "royalties_arguments": {

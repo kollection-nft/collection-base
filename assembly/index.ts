@@ -60,22 +60,12 @@ export function main(): i32 {
       break;
     }
 
-    case 0x779076c4: {
-      const args = Protobuf.decode<ProtoNamespace.circulating_supply_arguments>(
+    case 0xb0da3934: {
+      const args = Protobuf.decode<ProtoNamespace.total_supply_arguments>(
         contractArgs.args,
-        ProtoNamespace.circulating_supply_arguments.decode
+        ProtoNamespace.total_supply_arguments.decode
       );
-      const res = c.circulating_supply(args);
-      retbuf = Protobuf.encode(res, ProtoNamespace.uint64_object.encode);
-      break;
-    }
-
-    case 0x02c683fd: {
-      const args = Protobuf.decode<ProtoNamespace.max_supply_arguments>(
-        contractArgs.args,
-        ProtoNamespace.max_supply_arguments.decode
-      );
-      const res = c.max_supply(args);
+      const res = c.total_supply(args);
       retbuf = Protobuf.encode(res, ProtoNamespace.uint64_object.encode);
       break;
     }

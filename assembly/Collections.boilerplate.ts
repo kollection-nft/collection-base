@@ -56,19 +56,8 @@ export class Collections {
     return res;
   }
 
-  circulating_supply(
-    args: collections.circulating_supply_arguments
-  ): collections.uint64_object {
-    // YOUR CODE HERE
-
-    const res = new collections.uint64_object();
-    // res.value = ;
-
-    return res;
-  }
-
-  max_supply(
-    args: collections.max_supply_arguments
+  total_supply(
+    args: collections.total_supply_arguments
   ): collections.uint64_object {
     // YOUR CODE HERE
 
