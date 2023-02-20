@@ -57,12 +57,8 @@ afterAll(async () => {
   await localKoinos.stopNode();
 });
 
-function encodeBase64Url(str: string) {
-  return Buffer.from(str, 'utf-8').toString('base64url');
-}
-
-function decodeBase64Url(base64Str: string) {
-  return Buffer.from(base64Str, 'base64url').toString('utf-8');
+function encodeHex(str: string) {
+  return `0x${Buffer.from(str, 'utf-8').toString('hex')}`;
 }
 
 describe('mint', () => {
@@ -86,7 +82,7 @@ describe('mint', () => {
     ]));
     let eventData = await serializer.deserialize(res.receipt.events[0].data, eventName);
     expect(eventData.to).toEqual(user1.address);
-    expect(decodeBase64Url(eventData.token_id as string)).toEqual('1');
+    expect(eventData.token_id).toEqual(encodeHex('1'));
 
     // check total supply
     res = await collectionsContract.functions.total_supply({
@@ -103,7 +99,7 @@ describe('mint', () => {
 
     // check owner
     res = await collectionsContract.functions.owner_of({
-      token_id: encodeBase64Url('1')
+      token_id: encodeHex('1')
     });
 
     expect(res.result.value).toEqual(user1.address);
@@ -130,7 +126,7 @@ describe('mint', () => {
 
     eventData = await serializer.deserialize(res.receipt.events[0].data, eventName);
     expect(eventData.to).toEqual(user2.address);
-    expect(decodeBase64Url(eventData.token_id as string)).toEqual('2');
+    expect(eventData.token_id).toEqual(encodeHex('2'));
 
     // check total_supply
     res = await collectionsContract.functions.total_supply({
@@ -147,7 +143,7 @@ describe('mint', () => {
 
     // check owner
     res = await collectionsContract.functions.owner_of({
-      token_id: encodeBase64Url('2')
+      token_id: encodeHex('2')
     });
 
     expect(res.result.value).toEqual(user2.address);
@@ -161,7 +157,7 @@ describe('transfer', () => {
     let res = await collectionsContract.functions.transfer({
       from: user1.address,
       to: user2.address,
-      token_id: encodeBase64Url('1')
+      token_id: encodeHex('1')
     }, {
       beforeSend: async (tx) => {
         await user1.signer.signTransaction(tx);
@@ -180,10 +176,11 @@ describe('transfer', () => {
         impacted: [user2.address, user1.address]
       }
     ]));
+
     let eventData = await serializer.deserialize(res.receipt.events[0].data, eventName);
     expect(eventData.from).toEqual(user1.address);
     expect(eventData.to).toEqual(user2.address);
-    expect(decodeBase64Url(eventData.token_id as string)).toEqual('1');
+    expect(eventData.token_id).toEqual(encodeHex('1'));
 
     // check balances
     res = await collectionsContract.functions.balance_of({
@@ -200,7 +197,7 @@ describe('transfer', () => {
 
     // check owner
     res = await collectionsContract.functions.owner_of({
-      token_id: encodeBase64Url('1')
+      token_id: encodeHex('1')
     });
 
     expect(res.result.value).toEqual(user2.address);
