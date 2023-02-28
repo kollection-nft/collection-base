@@ -32,12 +32,12 @@ export class State {
   }
 
   // tokens
-  getToken(tokenId: u64): collections.token_object | null {
-    const token = System.getObject<string, collections.token_object>(this.tokenSpace, tokenId.toString(), collections.token_object.decode);
+  getToken(tokenId: string): collections.token_object | null {
+    const token = System.getObject<string, collections.token_object>(this.tokenSpace, tokenId, collections.token_object.decode);
     return token;
   }
-  saveToken(tokenId: u64, token: collections.token_object): void {
-    System.putObject(this.tokenSpace, tokenId.toString(), token, collections.token_object.encode);
+  saveToken(tokenId: string, token: collections.token_object): void {
+    System.putObject(this.tokenSpace, tokenId, token, collections.token_object.encode);
   }
 
   // balance
@@ -54,25 +54,25 @@ export class State {
 
 
   // approved
-  getApproved(tokenId: u64): collections.token_approval_object | null {
-    const token = System.getObject<string, collections.token_approval_object>(this.aprovedSpace, tokenId.toString(), collections.token_approval_object.decode);
-    return token
+  getApproved(tokenId: string): collections.token_approval_object | null {
+    const token = System.getObject<string, collections.token_approval_object>(this.aprovedSpace, tokenId, collections.token_approval_object.decode);
+    return token;
   }
-  saveApproved(tokenId: u64, approval: collections.token_approval_object): void {
-    System.putObject(this.aprovedSpace, tokenId.toString(), approval, collections.token_approval_object.encode);
+  saveApproved(tokenId: string, approval: collections.token_approval_object): void {
+    System.putObject(this.aprovedSpace, tokenId, approval, collections.token_approval_object.encode);
   }
-  removeApproved(tokenId: u64): void {
-    System.removeObject(this.aprovedSpace, tokenId.toString());
+  removeApproved(tokenId: string): void {
+    System.removeObject(this.aprovedSpace, tokenId);
   }
 
   // operator
   getApprovedOperator(approver: Uint8Array, operator: Uint8Array): collections.operator_approval_object | null {
-    const key = `${Base58.encode(approver)}_${Base58.encode(operator)}`
+    const key = `${Base58.encode(approver)}_${Base58.encode(operator)}`;
     const token = System.getObject<string, collections.operator_approval_object>(this.operatorSpace, key, collections.operator_approval_object.decode);
     return token;
   }
   saveApprovedOperator(approver: Uint8Array, operator: Uint8Array, approval: collections.operator_approval_object): void {
-    const key = `${Base58.encode(approver)}_${Base58.encode(operator)}`
+    const key = `${Base58.encode(approver)}_${Base58.encode(operator)}`;
     System.putObject(this.operatorSpace, key, approval, collections.operator_approval_object.encode);
   }
 
