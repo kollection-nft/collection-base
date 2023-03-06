@@ -43,14 +43,23 @@ export class Collections {
     // check max royaltie
     const royalties = args.value;
     let royaltiesTotal: u64 = 0;
+    let impacted: Uint8Array[] = []
     for (let index = 0; index < royalties.length; index++) {
       let royalty = royalties[index];
+      impacted.push(royalty.address);
       royaltiesTotal = SafeMath.add(royaltiesTotal, royalty.amount);
     }
     System.require(royaltiesTotal <= 10000, "MarketplaceV1.execute: ROYALTY_EXEDED_MAX");
     // update royalties
     config.royalties = args.value;
     this._state.saveConfig(config);
+
+    const royaltiesEvent = new collections.royalties_event(royalties);
+    System.event(
+      "collections.royalties_event",
+      Protobuf.encode(royaltiesEvent, collections.royalties_event.encode),
+      impacted
+    );
 
     return new collections.empty_object();
   }
@@ -64,9 +73,20 @@ export class Collections {
     // check owner
     const config = this._state.getConfig();
     this._checkOwner(config);
+
+    // event
+    const ownerEvent = new collections.owner_event(config.owner, args.owner);
+    const impacted = [ config.owner, args.owner ]
+
     // update owner
     config.owner = args.owner;
     this._state.saveConfig(config);
+
+    System.event(
+      "collections.owner_event",
+      Protobuf.encode(ownerEvent, collections.owner_event.encode),
+      impacted
+    );
 
     return new collections.empty_object();
   }
