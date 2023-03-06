@@ -1,6 +1,6 @@
 import { System, chain, Base58 } from "@koinos/sdk-as";
 import { collections } from "./proto/collections";
-
+import { Constants } from "./Constants";
 
 // spaces
 const TOKEN_SPACE_ID = 0;
@@ -82,7 +82,7 @@ export class State {
     if (config) {
       return config;
     }
-    return new collections.config_object();
+    return new collections.config_object(Constants.OWNER);
   }
   saveConfig(config: collections.config_object): void {
     System.putObject(this.configSpace, CONFIG_KEY, config, collections.config_object.encode);

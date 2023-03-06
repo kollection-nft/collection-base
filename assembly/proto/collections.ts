@@ -1147,6 +1147,93 @@ export namespace collections {
     }
   }
 
+  export class owner_event {
+    static encode(message: owner_event, writer: Writer): void {
+      if (message.from.length != 0) {
+        writer.uint32(10);
+        writer.bytes(message.from);
+      }
+
+      if (message.to.length != 0) {
+        writer.uint32(18);
+        writer.bytes(message.to);
+      }
+    }
+
+    static decode(reader: Reader, length: i32): owner_event {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new owner_event();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            message.from = reader.bytes();
+            break;
+
+          case 2:
+            message.to = reader.bytes();
+            break;
+
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    from: Uint8Array;
+    to: Uint8Array;
+
+    constructor(
+      from: Uint8Array = new Uint8Array(0),
+      to: Uint8Array = new Uint8Array(0)
+    ) {
+      this.from = from;
+      this.to = to;
+    }
+  }
+
+  export class royalties_event {
+    static encode(message: royalties_event, writer: Writer): void {
+      const unique_name_value = message.value;
+      for (let i = 0; i < unique_name_value.length; ++i) {
+        writer.uint32(10);
+        writer.fork();
+        royalty_object.encode(unique_name_value[i], writer);
+        writer.ldelim();
+      }
+    }
+
+    static decode(reader: Reader, length: i32): royalties_event {
+      const end: usize = length < 0 ? reader.end : reader.ptr + length;
+      const message = new royalties_event();
+
+      while (reader.ptr < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            message.value.push(royalty_object.decode(reader, reader.uint32()));
+            break;
+
+          default:
+            reader.skipType(tag & 7);
+            break;
+        }
+      }
+
+      return message;
+    }
+
+    value: Array<royalty_object>;
+
+    constructor(value: Array<royalty_object> = []) {
+      this.value = value;
+    }
+  }
+
   export class burn_event {
     static encode(message: burn_event, writer: Writer): void {
       if (message.from.length != 0) {

@@ -464,6 +464,33 @@
                             }
                         }
                     },
+                    "owner_event": {
+                        "fields": {
+                            "from": {
+                                "type": "bytes",
+                                "id": 1,
+                                "options": {
+                                    "(koinos.btype)": "ADDRESS"
+                                }
+                            },
+                            "to": {
+                                "type": "bytes",
+                                "id": 2,
+                                "options": {
+                                    "(koinos.btype)": "ADDRESS"
+                                }
+                            }
+                        }
+                    },
+                    "royalties_event": {
+                        "fields": {
+                            "value": {
+                                "rule": "repeated",
+                                "type": "royalty_object",
+                                "id": 1
+                            }
+                        }
+                    },
                     "burn_event": {
                         "fields": {
                             "from": {
