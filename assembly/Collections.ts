@@ -311,10 +311,7 @@ export class Collections {
     }
 
     // update approval
-    let approval = this._state.getApproved(token_id);
-    if (!approval) {
-      approval = new collections.token_approval_object(to);
-    }
+    let approval = new collections.token_approval_object(to);
     this._state.saveApproved(token_id, approval);
 
     // generate event
@@ -348,13 +345,7 @@ export class Collections {
     System.require(!Arrays.equal(approver_address, operator_address), "approve to operator_address", error.error_code.authorization_failure);
 
     // update the approval
-    let approval = this._state.getApprovedOperator(operator_address, approver_address);
-    if (!approval) {
-      approval = new collections.operator_approval_object(approved);
-    } else {
-      approval.approved = approved;
-    }
-
+    let approval = new collections.operator_approval_object(approved);
     this._state.saveApprovedOperator(operator_address, approver_address, approval);
 
     // generate event
